@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="86.69px" height="90.583px" viewBox="0 0 86.69 90.583" style="enable-background:new 0 0 86.69 90.583;"
+	 xml:space="preserve">
+<g>
+	<defs>
+		<rect id="SVGID_1_" y="0" width="86.691" height="90.583"/>
+	</defs>
+	<clipPath id="SVGID_2_">
+		<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+	</clipPath>
+	
+		<circle style="clip-path:url(#SVGID_2_);fill:none;stroke:#B2C8CE;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" cx="83.547" cy="58.702" r="2.143"/>
+	
+		<line style="clip-path:url(#SVGID_2_);fill:none;stroke:#B2C8CE;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="4" y1="24.5" x2="4" y2="18.5"/>
+	
+		<line style="clip-path:url(#SVGID_2_);fill:none;stroke:#B2C8CE;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="1" y1="21.5" x2="7" y2="21.5"/>
+	
+		<path style="clip-path:url(#SVGID_2_);fill:none;stroke:#4A6970;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" d="
+		M46.608,1c16.701,0,30.24,13.539,30.24,30.24c0,7.843-2.793,15.172-7.883,20.363c-2.154,2.197-6.353,6.021-8.014,9.342
+		c-1.659,3.322-1.207,7.097-1.207,7.097l-14.193-3.02"/>
+	
+		<path style="clip-path:url(#SVGID_2_);fill:none;stroke:#4A6970;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" d="
+		M46.801,1C30.1,1,16.561,14.539,16.561,31.24c0,7.843,2.793,15.172,7.883,20.363c2.154,2.197,6.352,6.021,8.013,9.342
+		c1.66,3.322,1.207,7.806,1.207,7.806l24.571,5.432"/>
+	
+		<line style="clip-path:url(#SVGID_2_);fill:none;stroke:#B2C8CE;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="35.586" y1="76.799" x2="57.43" y2="82.134"/>
+	
+		<line style="clip-path:url(#SVGID_2_);fill:none;stroke:#B2C8CE;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="36.693" y1="84.852" x2="55.215" y2="89.583"/>
+	
+		<path style="clip-path:url(#SVGID_2_);fill:none;stroke:#1AACD2;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" d="
+		M46.801,10.664c-11.364,0-20.576,9.212-20.576,20.576"/>
+</g>
+</svg>

@@ -1,0 +1,2 @@
+// $(document).ready(function(){AOS.init({once:!0,duration:800,easing:"ease-out",startEvent:'load'});AOS.refresh()})
+$(document).ready(function(){AOS.init({disable:"mobile",disable:window.innerWidth<767,once:!0,duration:300,easing:"ease-out",startEvent:"load"}),AOS.refresh()});

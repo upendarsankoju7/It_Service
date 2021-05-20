@@ -1,0 +1,354 @@
+.nave a:hover {
+    display: inline-block;
+  position: relative;
+  font-family: 'Gloria Hallelujah', cursive;
+  color: fuchsia;
+  
+}
+
+.ts
+{
+transform: scale(1.0);
+
+}
+
+.ts:hover
+{
+transform: scale(1.1);
+transition-duration: 200ms;
+transition-delay: 500ms;
+}
+
+
+.about
+{
+background-image:linear-gradient(to right, rgba(0,0,0,0.4), rgba(0,0,0,0.4) ), url(../images/back.jpg);
+background-size: cover;
+background-attachment: fixed;
+
+}
+
+.ci:hover{
+  box-shadow: red 0px 3px 4px 0px;
+
+
+}
+
+
+.flip-box {
+  background-color: transparent;
+  width: 300px;
+  height: 200px;
+  border: 1px solid #f1f1f1;
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+}
+
+/* This container is needed to position the front and back side */
+.flip-box-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flip-box:hover .flip-box-inner {
+  transform: rotateY(180deg);
+}
+
+/* Position the front and back side */
+.flip-box-front, .flip-box-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+/* Style the front side (fallback if image is missing) */
+.flip-box-front {
+  background-color: #bbb;
+  color: black;
+}
+
+/* Style the back side */
+.flip-box-back {
+  background: linear-gradient(to right, #606c88, #3f4c6b);
+  color: white;
+  transform: rotateY(180deg);
+}
+.web
+{
+  font-family: 'EB Garamond', serif;
+  text-align: center;
+  margin-top: 300px;
+  border: thistle;
+  color: white;
+  font-size: 70px;
+  text-shadow: 2px 2px wheat;
+
+
+}
+
+.care
+{
+
+ margin-top: 40px;
+  padding: 5px;
+  border-radius: 15px 50px 30px;
+background-color: whitesmoke
+  
+}
+.img4
+{
+  margin-top: 30px;
+  margin-bottom: 30px;
+
+
+}
+.cari
+{
+margin-top: 30px;
+color: skyblue;
+font-family: 'Gloria Hallelujah', cursive;
+font-size: 70px;
+}
+.a2
+{
+  font-family: 'Dokdo', cursive;
+color: snow;
+font-size: 50px;
+text-shadow: 2px lavender
+
+}
+
+
+
+.c1:hover
+{
+transform:scale(1.2);	
+
+}
+
+
+
+
+
+
+
+.box{
+  overflow: hidden;
+  box-shadow: 0 0 3px rgba(0,0,0,0.3);
+  position: relative;
+}
+.box:before{
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  transition: all 0.4s ease 0s;
+}
+.box:hover:before{ background: rgba(0,0,0,0.8); }
+.box img{
+  width: 103%;
+  height: 300px;
+  position: relative;
+  left: -3%;
+  transition: all 0.4s ease 0s;
+}
+.box:hover img{ left: 0; }
+.box .box-content{
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.box .title{
+  padding: 10px 0 15px 0;
+  margin: 0 0 20px 0;
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+  opacity: 0;
+  position: relative;
+  transition: all 0.3s ease 0s;
+}
+.box:hover .title{ opacity: 1; }
+.box .title:after{
+  content: "";
+  width: 0;
+  height: 2px;
+  background: #fff;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transition: all 0.3s ease 0s;
+}
+.box:hover .title:after{ width: 100%; }
+.box .post{
+  display: inline-block;
+  font-size: 16px;
+  color: #fff;
+  opacity: 0;
+  margin-bottom: 15px;
+  position: relative;
+  left: 100%;
+  transition: all 0.35s ease 0s;
+}
+.box:hover .post{
+  opacity: 1;
+  left: 0;
+}
+.box .icon{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  position: relative;
+  top: 50%;
+  transition: all 0.35s ease 0s;
+}
+.box:hover .icon{
+  opacity: 1;
+  top: 0;
+}
+.box .icon li{ display: inline-block; }
+.box .icon li a{
+  display: block;
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  border-radius: 50%;
+  background: #2886c9;
+  text-align: center;
+  font-size: 18px;
+  color: #fff;
+  margin-right: 10px;
+  transition: all 0.5s ease 0s;
+}
+.box .icon li a:hover{ transform: rotate(360deg); }
+@media only screen and (max-width:990px){
+  .box{ margin-bottom: 30px; }
+}
+.port
+{
+  margin-top:250px;
+  font-size: 70px;
+  font-family: 'Indie Flower', cursive;
+ text-shadow: lightsteelblue;
+  font-size: 90px;
+  text-align: center;
+
+
+
+}
+.cts
+{
+
+  margin-top:550px;
+  font-size: 70px;
+ color: lightsteelblue;
+  font-family: italic;
+  font-size: 70px;
+  text-align: center;
+}
+.index
+{
+margin-top: 280px;
+margin-left: 55px;
+color: whitesmoke;
+
+}
+.in
+{
+border: white solid 2px;
+text-align: center;
+cursor: pointer;
+
+}
+
+.in:hover
+{
+background-color: lightgrey;
+
+
+
+}
+
+
+.demo{ background: #262526; }
+.our-team{
+    padding: 20px 15px 30px;
+    background: #fff;
+    border-radius: 15px;
+    text-align: center;
+}
+.our-team .pic{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    padding: 10px;
+    margin-bottom: 25px;
+    transition: all 0.5s ease 0s;
+}
+.our-team:hover .pic{
+    background: #17bebb;
+    border-radius: 50%;
+}
+.pic img{
+    width: 90%;
+    height: auto;
+    border-radius: 50%;
+}
+.our-team .title{
+    display: block;
+    font-size: 20px;
+    font-weight: 600;
+    color: #2e282a;
+    text-transform: uppercase;
+    margin: 0 0 7px 0;
+}
+.our-team .post{
+    display: block;
+    font-size: 15px;
+    color: #17bebb;
+    text-transform: capitalize;
+    margin-bottom: 15px;
+}
+.our-team .social{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.our-team .social li{
+    display: inline-block;
+    margin-right: 5px;
+}
+.our-team .social li a{
+    display: block;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 50%;
+    font-size: 15px;
+    color: #17bebb;
+    border: 1px solid #17bebb;
+    transition: all 0.5s ease 0s;
+}
+.our-team:hover .social li a{
+    background: #17bebb;
+    color: #fff;
+}
+@media only screen and (max-width: 990px){
+    .our-team{ margin-bottom: 30px; }
+}
+

@@ -1,0 +1,392 @@
+
+//   Header Scroll Up/down Animation
+
+// Hide Header on on scroll down
+
+var didScroll;
+var lastScrollTop = 0;
+var delta = 5;
+var navbarHeight = $('header').outerHeight();
+
+$(window).scroll(function (event) {
+    didScroll = true;
+});
+
+setInterval(function () {
+    if (didScroll) {
+        hasScrolled();
+        didScroll = false;
+    }
+}, 250);
+
+function hasScrolled() {
+    var st = $(this).scrollTop();
+
+    // Make sure they scroll more than delta
+    if (Math.abs(lastScrollTop - st) <= delta)
+        return;
+    // If they scrolled down and are past the navbar, add class .nav-up.
+    // This is necessary so you never see what is "behind" the navbar.
+    if (st > lastScrollTop && st > navbarHeight) {
+        // Scroll Down
+        $('header .navbar').removeClass('nav-down').addClass('nav-up');
+    } else {
+        // Scroll Up
+        if (st + $(window).height() < $(document).height()) {
+            $('header .navbar').removeClass('nav-up').addClass('nav-down');
+        }
+    }
+
+    lastScrollTop = st;
+}
+
+function isNumberKeyevent(evt) {
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+}
+
+$('select').niceSelect();
+
+
+//file upload
+
+var inputs = document.querySelectorAll('.inputfile');
+Array.prototype.forEach.call(inputs, function (input) {
+    var label = input.nextElementSibling,
+        labelVal = label.innerHTML;
+
+    input.addEventListener('change', function (e) {
+        var fileName = '';
+        if (this.files && this.files.length > 1)
+            fileName = (this.getAttribute('data-multiple-caption') || '').replace('{count}', this.files.length);
+        else
+            fileName = e.target.value.split('\\').pop();
+
+        if (fileName)
+            label.querySelector('span').innerHTML = fileName;
+        else
+            label.innerHTML = labelVal;
+    });
+});
+
+
+$('.js-sync-top').slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    fade: true,
+    asNavFor: '.js-sync-bottom'
+});
+$('.js-sync-bottom').slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    asNavFor: '.js-sync-top',
+    // dots: true,
+    autoplay: true,
+    arrows: false,
+    centerMode: false,
+    focusOnSelect: true
+});
+
+
+/* Talk section */
+// Home page talk sectino parallax effect
+
+$.fn.isInViewport = function () {
+    var elementTop = $(this).eq(0).offset().top;
+    var elementBottom = elementTop + $(this).eq(0).outerHeight();
+
+    var viewportTop = $(window).scrollTop();
+    var viewportBottom = viewportTop + $(window).height();
+
+    return elementBottom > viewportTop && elementTop < viewportBottom;
+};
+
+$(document).ready(function () {
+
+    // Vars
+    var $links = $('ul.challengesMenuBar > li > a'),
+        $sections = getSections($links),
+        $root = $('html, body');
+
+    // Events
+    $(window).on('scroll', function () {
+        activateLink($sections, $links);
+    });
+
+    $('a[href*="#"]:not([href="#"])').on('click', function () {
+        var href = $.attr(this, 'href');
+
+        $root.animate({
+            scrollTop: $(href).offset().top
+        }, 500, function () {
+            window.location.hash = href;
+        });
+
+        return false;
+    });
+
+    // Init
+    // window.CP.PenTimer.MAX_TIME_IN_LOOP_WO_EXIT = Number.MAX_SAFE_INT;
+    activateLink($sections, $links);
+
+    // Functions
+    function getSections($links) {
+        var linksHref,
+            hashes = '';
+
+        for (var i = 0, len = $links.length; i < len; i++) {
+            linksHref = $links.eq(i).attr('href');
+
+            if (linksHref.charAt(0) === '#') {
+                hashes += linksHref + ',';
+            }
+        }
+        hashes = hashes.slice(0, -1);
+
+        return $(hashes);
+    }
+
+    function activateLink($sections, $links) {
+        var $section,
+            yPosition = $(window).scrollTop();
+
+        for (var i = $sections.length - 1; i >= 0; i--) {
+            $section = $sections.eq(i);
+
+            if (yPosition >= $section.offset().top) {
+                for (var j = 0, linksLen = $links.length; j < linksLen; j++) {
+                    $links.eq(j).removeClass('active');
+                }
+                $links.filter('[href="#' + $section.attr('id') + '"]').addClass('active');
+                return;
+            }
+        }
+    }
+    // }());
+});
+
+// Our Process Slider
+$(document).ready(function () {
+    var process_slider_element = $('#o-process-slider');
+
+    if ($(window).width() > 991) {
+        if (process_slider_element.length) {
+            initProcessSlider();
+        }
+    }
+});
+
+// Our Process Slider
+function initProcessSlider() {
+    var page_heading_height = $('.page-heading').outerHeight();
+    var processNavTitles = [];
+    $('#o-process-slider .swiper-slide').each(function (i) {
+        processNavTitles.push($(this).data('title'))
+    });
+
+    var ourProcessSlider = new Swiper('#o-process-slider', {
+        // Optional parameters
+        direction: 'vertical',
+        slidesPerView: 1,
+        loop: false,
+        bulletElement: 'a',
+        effect: 'fade',
+        mousewheel: {
+            releaseOnEdges: true,
+        },
+        keyboard: {
+            enabled: true,
+            onlyInViewport: false,
+        },
+        touchReleaseOnEdges: true,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+            renderBullet: function (index, className) {
+                var navEl = '';
+                navEl += '<div class="' + className + '">' + '<span>' + processNavTitles[index] + '</span></div>';
+                // console.log(navEl)
+                return navEl;
+            }
+        },
+        on: {
+            fromEdge: function () {
+                if ($(document).height() > $(window).height()) {
+                    $(window).scrollTop(0);
+                    var scrollTop = ($('html').scrollTop()) ? $('html').scrollTop() : $('body').scrollTop(); // Works for Chrome, Firefox, IE...
+                    $('html').addClass('noscroll').css('top', -scrollTop);
+                }
+            },
+            reachEnd: function () {
+                var scrollTop = parseInt($('html').css('top'));
+                $('html').removeClass('noscroll');
+                $('html,body').scrollTop(-scrollTop);
+            }
+        }
+    });
+}
+
+
+function scrollElementTop(element, to, duration) {
+    var start = element.scrollTop,
+        change = to - start,
+        currentTime = 0,
+        increment = 200;
+
+    var animateScroll = function () {
+        currentTime += increment;
+        var val = Math.easeInOutQuad(currentTime, start, change, duration);
+        element.scrollTop = val;
+        if (currentTime < duration) {
+            setTimeout(animateScroll, increment);
+        }
+    };
+    animateScroll();
+}
+
+//t = current time
+//b = start value
+//c = change in value
+//d = duration
+Math.easeInOutQuad = function (t, b, c, d) {
+    t /= d / 2;
+    if (t < 1) return c / 2 * t * t + b;
+    t--;
+    return -c / 2 * (t * (t - 2) - 1) + b;
+};
+
+// script to find the height of footer
+$(window).on("load resize", function () {
+    var footerHeight = $("footer").height();
+    console.log(footerHeight);
+    $('main').css('margin-bottom', footerHeight);
+});
+
+$(window).load(function(){
+    setTimeout(function(){
+        $('.loader-container').addClass('active');
+    }, 500)
+});
+
+
+// custom select option validation for general enquiry form
+$('#general-form').on("submit",function(){
+    if($(this).find('.nice-select .current').text().toLowerCase() !== "select"){
+        $(this).find(".nice-select-error").remove();
+        
+        return true;
+
+    }else {
+        if($(this).find(".nice-select-error").length) {
+            return false;
+        }
+        else {
+             $(this).find('#career-dropdown').after("<div class='nice-select-error fnt-xs text-uppercase'>Please Select the Option</div>");
+             
+        }
+        
+    }
+});
+$('select').on("change", function() {
+    $(".nice-select .current").css({'font-weight': "bold", "font-family": "'Montserrat', sans-serif"});
+    // $(".nice-select .option.selected.focus").css('color','#ec2786');
+    if(window.matchMedia("(min-width: 576px)").matches) {
+        $(".nice-select .current").css( "font-size" , "20px");
+    }
+    else if(window.matchMedia("(min-width: 1024px)").matches) {
+        $(".nice-select .current").css( "font-size" , "18px");
+    }
+    else {
+        $(".nice-select .current").css( "font-size" , "16px");
+    }
+});
+// custom select option validation for intern form
+$('#intern-form').on("submit",function(){
+    if($(this).find('.nice-select .current').text().toLowerCase() !== "select"){
+        $(this).find(".nice-select-error").remove();
+        
+        return true;
+
+    }else {
+        if($(this).find(".nice-select-error").length) {
+            return false;
+        }
+        else {
+             $(this).find('#intern-option').after("<div class='nice-select-error fnt-xs text-uppercase'>Please Select the Option</div>");
+             
+        }
+        
+    }
+});
+
+// Aos intialization
+
+$(document).ready(function() {
+		AOS.init({
+		disable: 'mobile',
+		disable: window.innerWidth < 767,
+		// offset: 50,
+		once: true,
+		duration: 300,
+		easing: "ease-out",
+		startEvent: 'load'
+	});
+	AOS.refresh();
+
+	// $(".tabLink").click(function(){
+	// 	AOS.refresh();
+	// })
+	
+// Home events gallery info
+
+  $('.js-gallery-slider').slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    infinite: true,
+    speed: 540,
+    // fade: true,
+    autoplay: true,
+    dots: true,
+    asNavFor: '.events-gallery__imgslider',
+    autoplay: false
+  });
+  
+  $('.events-gallery__imgslider').slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    infinite: true,
+    autoplay: true,
+    speed: 540,
+    asNavFor: '.js-gallery-slider',
+    // dots: true,
+    arrows: false,
+    focusOnSelect: true
+  });
+  
+});
+
+
+$(window).on('load', function(){
+    if($('body').find('.enterprise-banner').hasClass('js-find-class')) {
+        $('body').find('.enterprise-banner').closest('body').addClass('enterprise-industry');
+    }
+});
+
+
+$('.js-latest-project-content').slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    infinite: true,
+    arrows: false,
+    fade: true,
+    autoplay: true,
+    dots: true,
+    pauseOnHover: false,
+    autoplaySpeed: 6000,
+    adaptiveHeight: true
+ });
+  

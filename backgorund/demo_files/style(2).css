@@ -1,0 +1,23 @@
+/*
+CTC Separate Stylesheet
+Updated: 2016-04-25 20:31:46
+Theme Name: Pivot Child
+Theme URI: http://www.madeinebor.com
+Template: pivot
+Author: Tom Rhodes
+Author URI: http://www.madeinebor.com
+Description: Pivot - A Multipurpose, Responsive WordPress Theme.
+Tags: white,custom-background,threaded-comments,translation-ready,custom-menu
+Version: 1.4.15.1461645106
+*/
+
+@media (max-width:766px){section.article-single{padding-top:50px;padding-bottom:50px;}
+.article-single .container .row .col-sm-3,.article-single .container .row .col-sm-9, .article-single .container .row .col-sm-9 .col-sm-12{margin-bottom:0px;}
+a[rel="tag"]{padding-left:15px;padding-bottom:15px;}
+.wpcf7-form-control-wrap{margin-top:28px;}
+.footer-container .footer-top .wpcf7 .col-sm-3 .wpcf7-submit{margin-top:32px;}
+.page-header.title.ebor-pad-me .container,.page-header.title.ebor-pad-me .container .row{height:100%;}
+.page-header.title.ebor-pad-me .container .row{display:grid;}
+.page-header.title.ebor-pad-me .container .row .text-center{margin:auto 0px;}
+}
+input#submit.submit{border:1px solid #000;}

@@ -1,0 +1,1 @@
+$(function(){$('.open-popup-video').magnificPopup({type:'iframe',closeOnBgClick:!1});$('.open-popup-video').click(function(){setTimeout(function(){$('body .mfp-wrap iframe').addClass('active')},100)});$('.mfp-close').click(function(){$('body .mfp-wrap iframe').removeClass('active')})})

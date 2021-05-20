@@ -1,0 +1,2 @@
+$(window).scroll(function(){var scroll=$(window).scrollTop();if(scroll>100){$('.navbar').addClass('js-fixed');$('#navigation .nav-link').addClass('js-color js-active');$('.hamburger-cta span').addClass('js-active')}
+else{$('.navbar').removeClass('js-fixed');$('#navigation .nav-link').removeClass('js-color js-active');$('.hamburger-cta span').removeClass('js-active')}})

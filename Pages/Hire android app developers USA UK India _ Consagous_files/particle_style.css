@@ -1,0 +1,131 @@
+/* ---- reset ---- */
+canvas {
+  display: block;
+  vertical-align: bottom;
+}
+/* ---- particles.js container ---- */
+
+#particles-js {
+  background-image: url("../images/homme.jpg");
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  z-index: 110;
+}
+/*#particles-js canvas {
+    background-color: rgba(0, 0, 0, 0.7);
+    position: relative;
+    z-index: 111;
+}*/
+
+.bannercentertext {    position: absolute;
+    z-index: 1000;
+    color: white;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%; overflow: hidden;
+}
+
+
+ h1.bannercentertext { display: none; color: #ffffff; line-height: normal;font-size: 56px;font-weight: 700;text-transform: capitalize;}
+
+
+
+@media (max-width: 767px) {
+    h1.bannercentertext { font-size: 36px;}
+}
+
+
+/*
+.hopage-particle-slider {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+#consa-partic-wrap {
+    position: relative;
+    display: block;
+}
+.slider-text-middle-main {
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+.slider-text-middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+.slider-text-middle h1 {
+    font-size: 56px;
+    font-weight: 700;
+    width: 45%;
+    margin: 0 auto;
+    letter-spacing: 0px;
+    line-height: 70px;
+    text-transform: capitalize;
+    text-align: center;
+    position: relative;
+    color: #fff;
+    z-index: 11111;
+}
+.slider-text-middle p {
+    font-size: 22pt;
+    line-height: 32px;
+    padding-top: 20px;
+    color: #FFF;
+}*/
+
+/*********** ABOUT US PART  21-5-18 *************/
+.my-class.team_section .feature_holder{
+    display: none;
+}
+.my-class.team_section .projects_holder article span.text_holder{
+    background: transparent;
+}
+.my-class.team_section ul{
+    margin:0;
+}
+.my-class.team_section span.image img {
+    border-radius: 50%;
+}
+.my-class.team_section article:hover .image img{
+    transform: unset;
+}
+.my-class.team_section ul li.filter span{
+    border-radius: 25px;
+    color:#000;
+    border-color:#000;
+    font-weight:500;
+    background: transparent;
+    border: 1px solid;
+}
+.my-class.team_section ul li.filter:hover span{
+    color:#fff;
+        background-color: #ff9008 !important;
+}
+.my-class.team_section ul li.filter.active span{
+    color:#fff;
+    background-color: #ff9008 !important;
+}
+.my-class.team_section .filter_holder ul li {
+  margin: 3px 2px;
+}
+.my-class.team_section .projects_holder.clearfix.v5.standard {
+  padding-top: 45px;
+}
+.my-class.team_section h4,.my-class.team_section h4.portfolio_title a {
+  font-size: 15px;
+  text-align: center;
+}
+.my-class.team_section .filter_outer{
+    height:auto;
+}
+
+@media (max-width: 767px) {
+    /*.my-class.team_section .filter_outer{
+        height: 172px;
+        margin: 0px 0 10px;
+    }*/
+}

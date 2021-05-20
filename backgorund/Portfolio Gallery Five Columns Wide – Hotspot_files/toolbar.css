@@ -1,0 +1,27 @@
+.mkd_click_here,
+.mkd_click_here_2{
+    position: absolute;
+    width:139px;
+    height: 37px;
+    right: 0px;
+    top: 0px;
+    background-image:url('../img/click-here.png');
+    background-position: 0px 0px;
+    background-repeat: no-repeat;
+    z-index: 200;
+}
+
+.mkd_click_here_2{
+    background-image:url('../img/click-here-2.png');
+}
+
+.page-id-4857 .vc_custom_1468850050403 .mkd_click_here{
+    right: -6%;
+    top: -3%;
+}
+
+.page-id-4857 .vc_custom_1468854396167 .mkd_click_here_2{
+    right: auto;
+    left: -166px;
+    top: -23px;
+}

@@ -1,0 +1,551 @@
+$(document).ready(function() {
+    var hrf = window.location.href;
+    if(hrf.indexOf("/?") > 0) {
+        var ur = hrf.split("/?");
+        var utms = ur[1].split("&");
+        localStorage.setItem('utmSource', utms[0]);
+        localStorage.setItem('utmMedium', utms[1]);
+    }
+    $("#reachUs").validate({
+        rules: {
+            name: {
+                required: true
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            subject: {
+                required: true,
+                minlength: 2
+            },
+            message: {
+                required: true,
+                minlength: 20
+            },
+            referer: {
+                required:true
+            }
+        },
+        messages: {
+            name: {
+                required: "Please Enter Your Name"
+            },
+            email: {
+                required: "Please Enter Your EmailId",
+                email: "Please Enter Correct EmailId"
+            },
+            subject: {
+                required: "Please Enter Subject",
+                minlength: "Enter minimum 2 Characters"
+            },
+            message: {
+                required: "Please Enter Your Message",
+                minlength: "Enter minimum 20 Characters"
+            },
+            referer: {
+                required:"Please Select an Option"
+            }
+        },
+        submitHandler: function(form) {
+            $('.blur').fadeIn();
+            $('.loading').fadeIn();
+             var source = localStorage.getItem('utmSource');
+             var medium = localStorage.getItem('utmMedium');
+             var SM;
+             if(source !== null & medium !== null) {
+                 SM = source +"\n"+medium+"\n"
+             } else {
+                 SM = ''
+             }
+            var inputdata = {
+                name: $.trim($("#name").val()),
+                email: $.trim($("#email").val()),
+                subject: "MobileWays Contact Us : " + $.trim($("#subject").val()),
+                message: SM+$.trim($("#message").val()) + "\n\Source: " + $.trim($("#referer").val())
+            };
+            $.ajax({
+                url: 'http://www.mobileways.in/services/email',
+                type: 'POST',
+                headers: {
+                    "cache-control": "no-cache"
+                },
+                data: JSON.stringify(inputdata),
+                dataType: 'json',
+                contentType: 'application/json',
+                async: true,
+                success: function(out) {
+                    if (out.status != "success") {
+                        console.log('Please try again ');
+                        $('body').addClass('hide-over');
+                        $('.blur .loading').fadeOut("slow", function() {
+                            $('.alert-info').fadeIn(500).delay(2000).fadeOut("slow", function() {
+                                $('.blur').fadeOut();
+                                $('body').removeClass('hide-over');
+                            });
+                        });
+                    }
+                    $('body').addClass('hide-over');
+                    $('.blur .loading').fadeOut("slow", function() {
+                        $('.alert-success').fadeIn(500).delay(2000).fadeOut("slow", function() {
+                            $('form[name="reachUs"]')[0].reset();
+                            $('.close').click();
+                            $('.blur').fadeOut();
+                            $('body').removeClass('hide-over');
+                        });
+                    });
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    console.log('Please try again ');
+                    $('body').addClass('hide-over');
+                    $('.blur .loading').fadeOut("slow", function() {
+                        $('.alert-danger').fadeIn(500).delay(2000).fadeOut("slow", function() {
+                            $('.blur').fadeOut();
+                            $('body').removeClass('hide-over');
+                        });
+                    });
+                }
+            });
+        }
+    });
+    var cust1 = 'hide';
+    var i = 1;
+    var comments = ["They’re a great company with great people.","The speed at which they delivered was unparalleled",'Their team is the perfect size for a startup like ours.']
+    var fname = ['Founder, Gallihunt','CTO, CreditVidya','Founder, Givhero, Inc.']
+    setInterval(function(){ 
+        if(cust1 === 'hide') {
+            $('.customer1').fadeOut(500);
+            $('.customer2 .customer-review').html('"'+comments[i]+'"')
+            $('.customer2 .customer-name').html(fname[i])
+            $('.customer2').delay(500).fadeIn(500);
+            cust1 = 'show'
+            i++;
+            if(i >= comments.length) {
+                i=0;
+            }
+        }else {
+            $('.customer2').fadeOut(500);
+            $('.customer1 .customer-review').html('"'+comments[i]+'"')
+            $('.customer1 .customer-name').html(fname[i])
+            $('.customer1').delay(500).fadeIn(500);
+            cust1 = 'hide'
+            i++;
+            if(i >= comments.length) {
+                i=0;
+            }
+        }
+    }, 3000);
+    if(screen.width <= 640) {
+        $('.modal-dialog').css('padding-top','200px');
+    }
+
+});
+service_sec = $('.services-section').offset().top;
+$('.carousel').carousel({
+    pause: 'none',
+    interval: 5000
+});
+$(document).ready(function() {
+    if ($(window).height() < 325) {
+        $('.item .slide-img').addClass('landscape');
+    }
+    $(window).on('resize', function() {
+        if ($(window).height() < 325) {
+            $('.item .slide-img').addClass('landscape');
+        } else if ($(window).height() > 325 && $(window).height() < 600) {
+            $('.item .slide-img').removeClass('landscape');
+        }
+    })
+    nav();
+    $('.res-menu-abs').on('click', function() {
+         $('.menu-bar-responsive').toggleClass('height');
+        // if ($('.menu-bar-responsive').is(':visible'))
+        //     $('.menu-bar-responsive').addClass('height1');
+        // else
+        //     $(document).find('.menu-bar-responsive').addClass('height');
+        // var cls = $('.menu-bar-responsive').attr('class');
+        // var cls_sp = cls.split(' ');
+        // if (cls_sp.length == 2) {
+        //      $('.menu-bar-responsive').removeClass('height');
+        // } else {
+        //     $('.menu-bar-responsive').removeClass('height').addClass('height');
+        //     console.log($('.menu-bar-responsive').hasClass('height'));
+        // }
+    });
+    $('#next-slide').click(function() {
+        $('.work-slide-section').addClass('left-slide');
+    });
+    $('#next-slide1').click(function() {
+        $('.work-slide-section').addClass('left-slide1');
+    });
+    $('#prev-slide').click(function() {
+        $('.work-slide-section').removeClass('left-slide');
+    });
+    $('#prev-slide1').click(function() {
+        $('.work-slide-section').removeClass('left-slide1');
+    });
+    $('.value-circle .img').click(function() {
+        var cls = $(this).attr('class');
+        var cls_sp = cls.split(' ');
+        if ($(this).hasClass('active')) {
+            return false;
+        } else {
+            $('.value-circle .img').removeClass('active');
+            $(this).addClass('active');
+            $('.value-data').slideUp(300);
+            $('.' + cls_sp[0] + '-sec').delay(300).slideDown(300);
+        }
+    });
+});
+$(document).scroll(function() {
+    nav();
+    if ($(document).scrollTop() > 500) {}
+});
+
+function nav() {
+    if ($(window).scrollTop() > 90) {
+        $("nav").addClass("active");
+    } else {
+        $("nav").removeClass("active");
+    }
+}
+document.onreadystatechange = function() {
+    if (document.readyState == "complete") {
+        console.log('ready');
+        $('#map iframe').attr('src', 'https://www.google.com/maps/embed/v1/place?q=MobileWays+Software+Solutions+Pvt.+Ltd.+Madhapur,+Hyderabad,+Telangana,+India&key=AIzaSyCq9diY5bTLQs9Fej5rQ_PU27zUgrLJnyU');
+    }
+}
+var slide1 = ['thub', 'hdfcred', 'audiobitts', 'anymedic', "skiwee", "voler","menzies","healthfile", "lookmylife","isocheral", "scoreup"];
+var slide2 = ["emr", "surgenlogbook", "cracingcam", "milecatchertraffic", "bol", "notes", "rezolve", "Kendamagear"];
+$(document).ready(function() {
+window.onbeforeunload = function() {
+    localStorage.removeItem('utmSource');
+    localStorage.removeItem('utmMedium');
+};
+    var data = {
+        "t-hub": {
+            "AppName": " T-hub",
+            "AppImg": "t-hub",
+            "Appdesc": "Provides an insight into the upcoming events, and the happenings at T-Hub. In addition, the App also provides its existing users all the features that they have on Web using Nexudus platform.",
+            "Highlights": ['Integration with Nexudus APIs.', 'Freshdesk integration for support tickets.']
+        },
+        
+        "hdfcred": {
+            "AppName": " HDFC Red",
+            "AppImg": "hdfcred",
+            "Appdesc": "Application lets consumer in need of buying home - enter his requirements, prioritize the requirements and then provides the matching properties with relevance score. It also provides the platform to contact the corresponding Developer (Builder).",
+            "Highlights": ['Full touch based App with minimal usage of keypad.', 'Built for a highly reputed organization.']
+        },
+        "cracingcam": {
+            "AppName": "CrackingCam",
+            "AppImg": "cracingcam",
+            "Appdesc": "A social app where friends can rate a party they are currently present at. App functionality is similar like SnapChat where all the media and review gets deleted and limited to one day. Using facebook API for authentication and connecting with friends.",
+            "Highlights": ['Facebook integration.', 'Integration with CMS.', 'Integration with cloud based database and content management system.']
+        },
+        "sv": {
+            "AppName": "Swachh Vaidyalayam",
+            "AppImg": "sv",
+            "Appdesc": "Swachh Vaidyalayam App helps the PHCs to respond to the Survey conducted by Water Aid organization to assess the WASH (WAter, Sanitation and Hygiene) conditions.",
+            "Highlights": ['Offline capability.', 'GPS tagging.', 'Notifications.']
+        },
+        "rezolve": {
+            "AppName": "Rezolve",
+            "AppImg": "rezolve",
+            "Appdesc": "iPhone app where you can quickly post a question anonymously to your friends and get their answers. A crowdsource platform to solve your problems.",
+            "Highlights": ['Integration with cloud based database.', 'Twilio Integration for SMS verification.', 'Push Notifications.']
+        },
+        "voler": {
+            "AppName": "Voler Cars",
+            "AppImg": "voler",
+            "Appdesc": "iPhone application for Self-Drive car rental service which gives user the freedom and flexibility of booking a car. User can choose to book the car by the hour, day or month.",
+            "Highlights": ['Payment Gateway Integration.', 'Push Notifications.', 'GPS based filtering.', 'Analytics.']
+        },
+        "healthfile": {
+            "AppName": " Healthfile",
+            "AppImg": "healthfile",
+            "Appdesc": "Healthfile helps the Patient to organize all medical records safely and assures privacy with no server storage. Backup and Import of Heathfile helps to keep the data safe.",
+            "Highlights": ['Easy to use.', 'Offline capability.','Ability to add PDF files.','Healthfile export, share and import.']
+        },
+        "menzies": {
+            "AppName": "Menzies",
+            "AppImg": "menzies",
+            "Appdesc": "Web based Visitor Management System that can capture the visitor photo, create a digital pass and print it making it an end to end solution. Reporting feature lets the Management get different statistics.",
+            "Highlights": ['Cloud backed solution.', 'Can capture visitor photo and print the pass.','Allows in-time and out-time capture.','Reporting feature.']
+        },
+        "bol": {
+            "AppName": "BOL",
+            "AppImg": "bol",
+            "Appdesc": "Android & iOS app designed to send quick voice messages to your friends in phone contact list. Real time voice messaging app with features just designed for a common user.",
+            "Highlights": ['Contact book integration.', 'Offline capability.', 'Push Notifications.']
+        },
+        "surgenlogbook": {
+            "AppName": "Surgeon's Logbook",
+            "AppImg": "surgenlogbook",
+            "Appdesc": "App helps surgical trainees to track their operative and academic activities. Help them log the patient records.",
+            "Highlights": ['Works online/offline modes.', 'Cloud based so that the data never gets lost.', 'Option to share records with other app users.']
+        },
+        "emr": {
+            "AppName": "My EMR",
+            "AppImg": "emr",
+            "Appdesc": "Android application to organize all medical health records of patient and family members.",
+            "Highlights": ['QR code scanner implementation.', 'Hand written out patient records on mobile.', 'Instant access of data from Patient’s app to Doctor’s app.']
+        },
+        "isocheral": {
+            "AppName": "Isochiral Music",
+            "AppImg": "isocheral",
+            "Appdesc": "Android & iOS application which allows customers to purchase monthly subscription to access Isochiral Music. Key features include in-app purchase, audio play back and push notifications.",
+            "Highlights": ['Offline access to the music files.', 'Integration with cloud based database and content management system.']
+        },
+        "Kendamagear": {
+            "AppName": "Kendamagear Tournment Edition",
+            "AppImg": "Kendamagear",
+            "Appdesc": "App built to play Kendama tournaments, and training. Helps the users to play multi-player, single player and in timer modes.",
+            "Highlights": ['Kendama Trick Animations to display techniques.', 'In-App Purchases.', 'Split screen multi player display.', 'iAd integration.']
+        },
+        "notes": {
+            "AppName": "Notes.ac",
+            "AppImg": "notes",
+            "Appdesc": "iPhone based notes application with in-built rich text editor. Users can set reminders for the note which will get synced with iPhone calendar app. User can record an audio, make drawing, take a picture, set current GPS location to the note.",
+            "Highlights": ['Gesture based controls.', 'One of the very few rich-text based notes app.', 'Syncing option with web based application.']
+        },
+        "milecatchertraffic": {
+            "AppName": "MileCatcher",
+            "AppImg": "milecatchertraffic",
+            "Appdesc": "iPhone app which helps the drivers look at their driving habits and help them improve the driving. Measures hard breaks, rapid acceleration and above speed limits and report in the app. Allow sharing the data in social media.",
+            "Highlights": ['GPS data based algorithm to track vehicle monitoring data.', 'Facebook Integration.', 'Detecting user movement using motion sensor.']
+        },
+        "scoreup": {
+            "AppName": "ScoreUp",
+            "AppImg": "scoreup",
+            "Appdesc": "Application helps the users to get their approximate credit score and helps them improve it by interactive quizzes and learning material. Publish promotions to target audience.",
+            "Highlights": ['Gamification features to get user engagement.', 'Built in intelligence to simulate user behavior in quizzes.', 'Real time analytics and option to monitor game algorithms.']
+        },
+        "lookmylife": {
+            "AppName": "Look My Life",
+            "AppImg": "lookmylife",
+            "Appdesc": "App to help in kids learning by using videos, pictures and audio. Help in teaching words, different languages. Simple to use for kids. Parent mode with more features.",
+            "Highlights": ['Audio/Video integration.', 'InApp purchases.', 'Shuffle cards with animation.']
+        },
+        "anymedic": {
+            "AppName": "AnyMedic",
+            "AppImg": "anymedic",
+            "Appdesc": "Suite of Apps – Patient and Doctor versions. Patient books a follow up call with Doctor and Doctor connects with the Patient at convenience.",
+            "Highlights": ['Calls placed using Cloud Telephony.', 'Phone numbers are not disclosed.', 'Push Notifications.', 'Doctor App can be installed only by invitation.']
+        },
+        "audiobitts": {
+            "AppName": "AudioBitts",
+            "AppImg": "audiobitts",
+            "Appdesc": "App that lets you record and share audio clips. Best part is, App also takes photos during audio recording and lets you pick one as the cover image.",
+            "Highlights": ['All the social network features – Follow, Tag, Like, Comment, etc. ', 'Push Notifications.', 'Privacy Settings (private profiles).']
+        },
+        "skiwee": {
+            "AppName": "Skiwee",
+            "AppImg": "skiwee",
+            "Appdesc": " Suite of Applications – Consumer & Technician versions. Consumer can book a service (Plumbing/Carpentry/ Electrical/etc) and track the progress. Technician App helps Service Executive to get the requests assigned and update the progress.",
+            "Highlights": ['Ability to choose from saved addresses.', 'Push Notifications.', 'Privacy Settings (private profiles).']
+        },
+        "gallihunt": {
+            "AppName": "GALLI HUNT",
+            "AppImg": "gallihunt",
+            "Appdesc": "Gallihunt want to save your beautiful time by finding that elusive store from your neighbourhood. All the while you are made to see what others 'prefer' showing you, but at Gallihunt we believe in discovering precisely what you 'need'.",
+            "Highlights": ['Realtime direction and navigation from application.', 'Users can contribute their location/shop details to the application.', 'User can add shops to his/her favourites.']
+        }
+    };
+    $('.read-more').click(function() {
+        var link_name = $(this).attr('data-name');
+        var app = data[link_name];
+        $('.modal-content .modal-title').html(app.AppName);
+        $('.modal-content .img-class img').attr('src', "img/" + app.AppImg + ".png");
+        $('.modal-content .data-section .description').html(app.Appdesc);
+        $('.modal-content .data-section ul').find('li').remove();
+        for (i = 0; i < app.Highlights.length; i++) {
+            $('.modal-content .data-section ul').append("<li>" + app.Highlights[i]) + "<li>";
+        }
+    });
+    $("body").on("click", ".float-sec img", function(event) {
+        var link_name = $(this).attr('alt');
+        var app = data[link_name];
+        $('.modal-content .modal-title').html(app.AppName);
+        $('.modal-content .img-class img').attr('src', "img/" + app.AppImg + ".png");
+        $('.modal-content .data-section .description').html(app.Appdesc);
+        $('.modal-content .data-section ul').find('li').remove();
+        for (i = 0; i < app.Highlights.length; i++) {
+            $('.modal-content .data-section ul').append("<li>" + app.Highlights[i]) + "<li>";
+        }
+    });
+    var compareslide = ['t-hub','gallihunt', 'hdfcred', 'audiobitts', 'sv','anymedic', "voler", "menzies","healthfile","skiwee","isocheral", "emr", "surgenlogbook", "cracingcam", "milecatchertraffic", "lookmylife","bol", "notes", "rezolve", "scoreup", "Kendamagear"];
+    var model_length = compareslide.length;
+    $('.arrow-abs-lt').click(function() {
+        v = $('.modal-body .img-class img').attr('src');
+        k = v.split("/");
+        l = k[1].split(".");
+        com = jQuery.inArray(l[0], compareslide);
+        if (com == 0 || com == model_length) {
+            com = compareslide.length;
+        }
+        if (com <= model_length) {
+            var app = data[compareslide[com - 1]];
+            $('.modal-content .modal-title').html(app.AppName);
+            $('.modal-content .img-class img').attr('src', "img/" + app.AppImg + ".png");
+            $('.modal-content .data-section .description').html(app.Appdesc);
+            $('.modal-content .data-section ul').find('li').remove();
+            for (i = 0; i < app.Highlights.length; i++) {
+                $('.modal-content .data-section ul').append("<li>" + app.Highlights[i]) + "<li>";
+            }
+        } else if (com >= model_length) {
+            var app = data[compareslide[com - 1]];
+            $('.modal-content .modal-title').html(app.AppName);
+            $('.modal-content .img-class img').attr('src', "img/" + app.AppImg + ".png");
+            $('.modal-content .data-section .description').html(app.Appdesc);
+            $('.modal-content .data-section ul').find('li').remove();
+            for (i = 0; i < app.Highlights.length; i++) {
+                $('.modal-content .data-section ul').append("<li>" + app.Highlights[i]) + "<li>";
+            }
+        }
+    });
+    $('.arrow-abs-rt').click(function() {
+        v = $('.modal-body .img-class img').attr('src');
+        k = v.split("/");
+        l = k[1].split(".");
+        com = jQuery.inArray(l[0], compareslide);
+        if (com == model_length - 1) {
+            com = -1;
+        }
+        if (com <= model_length) {
+            var app = data[compareslide[com + 1]];
+            $('.modal-content .modal-title').html(app.AppName);
+            $('.modal-content .img-class img').attr('src', "img/" + app.AppImg + ".png");
+            $('.modal-content .data-section .description').html(app.Appdesc);
+            $('.modal-content .data-section ul').find('li').remove();
+            for (i = 0; i < app.Highlights.length; i++) {
+                $('.modal-content .data-section ul').append("<li>" + app.Highlights[i]) + "<li>";
+            }
+        } else if (com == model_length) {
+            var app = data[compareslide[com - 1]];
+            $('.modal-content .modal-title').html(app.AppName);
+            $('.modal-content .img-class img').attr('src', "img/" + app.AppImg + ".png");
+            $('.modal-content .data-section .description').html(app.Appdesc);
+            $('.modal-content .data-section ul').find('li').remove();
+            for (i = 0; i < app.Highlights.length; i++) {
+                $('.modal-content .data-section ul').append("<li>" + app.Highlights[i]) + "<li>";
+            }
+        }
+    });
+    ww = $(window).width();
+    $(window).on('resize', function() {
+        ww = $(window).width();
+    });
+    $("div.modal-body").on("swiperight", swipeleftHandler);
+
+    function swipeleftHandler(event) {
+        v = $('.modal-body .img-class img').attr('src');
+        k = v.split("/");
+        l = k[1].split(".");
+        com = jQuery.inArray(l[0], compareslide);
+        if (com == 0 || com == model_length) {
+            com = compareslide.length;
+        }
+        if (com <= model_length) {
+            var app = data[compareslide[com - 1]];
+            $('.modal-content .modal-title').html(app.AppName);
+            $('.modal-content .img-class img').attr('src', "img/" + app.AppImg + ".png");
+            $('.modal-content .data-section .description').html(app.Appdesc);
+            $('.modal-content .data-section ul').find('li').remove();
+            for (i = 0; i < app.Highlights.length; i++) {
+                $('.modal-content .data-section ul').append("<li>" + app.Highlights[i]) + "<li>";
+            }
+        } else if (com >= model_length) {
+            var app = data[compareslide[com - 1]];
+            $('.modal-content .modal-title').html(app.AppName);
+            $('.modal-content .img-class img').attr('src', "img/" + app.AppImg + ".png");
+            $('.modal-content .data-section .description').html(app.Appdesc);
+            $('.modal-content .data-section ul').find('li').remove();
+            for (i = 0; i < app.Highlights.length; i++) {
+                $('.modal-content .data-section ul').append("<li>" + app.Highlights[i]) + "<li>";
+            }
+        }
+    }
+    $("div.modal-body").on("swipeleft", swiperightHandler);
+
+    function swiperightHandler(event) {
+        v = $('.modal-body .img-class img').attr('src');
+        k = v.split("/");
+        l = k[1].split(".");
+        com = jQuery.inArray(l[0], compareslide);
+        if (com < model_length - 1) {
+            var app = data[compareslide[com + 1]];
+            $('.modal-content .modal-title').html(app.AppName);
+            $('.modal-content .img-class img').attr('src', "img/" + app.AppImg + ".png");
+            $('.modal-content .data-section .description').html(app.Appdesc);
+            $('.modal-content .data-section ul').find('li').remove();
+            for (i = 0; i < app.Highlights.length; i++) {
+                $('.modal-content .data-section ul').append("<li>" + app.Highlights[i]) + "<li>";
+            }
+        } else if (com == model_length - 1) {
+            com = 1;
+            var app = data[compareslide[com - 1]];
+            $('.modal-content .modal-title').html(app.AppName);
+            $('.modal-content .img-class img').attr('src', "img/" + app.AppImg + ".png");
+            $('.modal-content .data-section .description').html(app.Appdesc);
+            $('.modal-content .data-section ul').find('li').remove();
+            for (i = 0; i < app.Highlights.length; i++) {
+                $('.modal-content .data-section ul').append("<li>" + app.Highlights[i]) + "<li>";
+            }
+        }
+    }
+    $('.logo').click(function() {
+        $('html, body').animate({
+            scrollTop: $("#myCarousel").offset().top
+        }, 1500);
+    });
+    $(".services").click(function() {
+        $('html, body').animate({
+            scrollTop: $("#services").offset().top
+        }, 1500);
+        $('.menu-bar-responsive').removeClass('height');
+    });
+    $(".work").click(function() {
+        $('html, body').animate({
+            scrollTop: $("#work").offset().top - 57
+        }, 1500);
+        $('.menu-bar-responsive').removeClass('height');
+    });
+    $(".about").click(function() {
+        $('html, body').animate({
+            scrollTop: $("#about").offset().top - 57
+        }, 1500);
+        $('.menu-bar-responsive').removeClass('height');
+    });
+    $(".testimonials").click(function() {
+        $('html, body').animate({
+            scrollTop: $("#testimonials").offset().top - 57
+        }, 1500);
+        $('.menu-bar-responsive').removeClass('height');
+    });
+    $(".team").click(function() {
+        $('html, body').animate({
+            scrollTop: $("#team").offset().top - 57
+        }, 1500);
+        $('.menu-bar-responsive').removeClass('height');
+    });
+    $(".talk").click(function() {
+        $('html, body').animate({
+            scrollTop: $("#talk").offset().top - 57
+        }, 1500);
+        $('.menu-bar-responsive').removeClass('height');
+    });
+});
+$("#myCarousel").swiperight(function() {
+    $(this).carousel('prev');
+});
+$("#myCarousel").swipeleft(function() {
+    $(this).carousel('next');
+});
+$(document).click(function(event) {
+    var clickover = $(event.target);
+    var $navbar = $(".menu-bar-responsive");
+    var _opened = $navbar.hasClass("height");
+    if (_opened === true && !clickover.hasClass("res-menu-abs")) {
+        $(".menu-bar-responsive").removeClass('height');
+    }
+});

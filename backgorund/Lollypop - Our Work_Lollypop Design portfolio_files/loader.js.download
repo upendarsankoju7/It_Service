@@ -1,0 +1,1 @@
+$(window).load(function(){setTimeout(function(){$('.loader-container').addClass('active')},500)})
